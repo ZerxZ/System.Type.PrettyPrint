@@ -908,7 +908,7 @@ public partial class Algorithms
 
         static string GetSimpleTypeName(Type type)
         {
-            return _builtinTypeNameDict.GetValueOrDefault(type, type.Name);
+            return _builtinTypeNameDict.TryGetValue(type, out var name) ? name : type.Name;
         }
     }
     [ThreadStatic] private static StringBuilder _stringBuilder6;
@@ -1031,7 +1031,7 @@ public partial class Algorithms
 
         static string GetSimpleTypeName(Type type)
         {
-            return _builtinTypeNameDict.GetValueOrDefault(type, type.Name);
+            return _builtinTypeNameDict.TryGetValue(type, out var name) ? name : type.Name;
         }
     }
 
@@ -1150,7 +1150,7 @@ public partial class Algorithms
 
         static string GetSimpleTypeName(Type type)
         {
-            return _builtinTypeNameDict.GetValueOrDefault(type, type.Name);
+            return _builtinTypeNameDict.TryGetValue(type, out var name) ? name : type.Name;
         }
     }
 
@@ -1276,7 +1276,7 @@ public partial class Algorithms
 
         static string GetSimpleTypeName(Type type)
         {
-            return _builtinTypeNameDict.GetValueOrDefault(type, type.Name);
+            return _builtinTypeNameDict.TryGetValue(type, out var name) ? name : type.Name;
         }
     }
 
@@ -1402,7 +1402,7 @@ public partial class Algorithms
 
         static string GetSimpleTypeName(Type type)
         {
-            return _builtinTypeNameDict.GetValueOrDefault(type, type.Name);
+            return _builtinTypeNameDict.TryGetValue(type, out var name) ? name : type.Name;
         }
     }
 
@@ -1531,7 +1531,7 @@ public partial class Algorithms
 
         static string GetSimpleTypeName(Type type)
         {
-            return _builtinTypeNameDict.GetValueOrDefault(type, type.Name);
+            return _builtinTypeNameDict.TryGetValue(type, out var name) ? name : type.Name;
         }
     }
 
@@ -1641,7 +1641,7 @@ public partial class Algorithms
 
         static string GetSimpleTypeName(Type type)
         {
-            return _builtinTypeNameDict.GetValueOrDefault(type, type.Name);
+            return _builtinTypeNameDict.TryGetValue(type, out var name) ? name : type.Name;
         }
     }
 
@@ -1758,7 +1758,7 @@ public partial class Algorithms
 
         static string GetSimpleTypeName(Type type)
         {
-            return _builtinTypeNameDict.GetValueOrDefault(type, type.Name);
+            return _builtinTypeNameDict.TryGetValue(type, out var name) ? name : type.Name;
         }
     }
 
@@ -1879,7 +1879,7 @@ public partial class Algorithms
 
         static string GetSimpleTypeName(Type type)
         {
-            return _builtinTypeNameDict.GetValueOrDefault(type, type.Name);
+            return _builtinTypeNameDict.TryGetValue(type, out var name) ? name : type.Name;
         }
     }
 }
