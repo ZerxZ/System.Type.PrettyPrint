@@ -22,14 +22,14 @@ public partial class Algorithms
     [Benchmark] public void ModerateType_JSDY_OPT3() => ModerateType(ConstructTypeName_JSDY_OPT3);
     [Benchmark] public void CrazyType_JSDY_OPT3() => CrazyType(ConstructTypeName_JSDY_OPT3);
 
+    [Benchmark] public void SimpleType_JSDY_OPT5()   => SimpleType(ConstructTypeName_JSDY_OPT5);
+    [Benchmark] public void ModerateType_JSDY_OPT5() => ModerateType(ConstructTypeName_JSDY_OPT5);
+    [Benchmark] public void CrazyType_JSDY_OPT5()    => CrazyType(ConstructTypeName_JSDY_OPT5);
+
 
     [Benchmark] public void SimpleType_JSDY_OPT4() => SimpleType(ConstructTypeName_JSDY_OPT4);
     [Benchmark] public void ModerateType_JSDY_OPT4() => ModerateType(ConstructTypeName_JSDY_OPT4);
     [Benchmark] public void CrazyType_JSDY_OPT4() => CrazyType(ConstructTypeName_JSDY_OPT4);
-
-    [Benchmark] public void SimpleType_JSDY_OPT5() => SimpleType(ConstructTypeName_JSDY_OPT5);
-    [Benchmark] public void ModerateType_JSDY_OPT5() => ModerateType(ConstructTypeName_JSDY_OPT5);
-    [Benchmark] public void CrazyType_JSDY_OPT5() => CrazyType(ConstructTypeName_JSDY_OPT5);
 
     [Benchmark] public void SimpleType_JSDY_OPT6() => SimpleType(ConstructTypeName_JSDY_OPT6);
     [Benchmark] public void ModerateType_JSDY_OPT6() => ModerateType(ConstructTypeName_JSDY_OPT6);
@@ -791,14 +791,16 @@ public partial class Algorithms
             if (type.IsArray)
             {
                 AppendArray(sb, type);
-                return;
-            }
+            }else
             if (type.IsGenericType)
             {
                 AppendGeneric(sb, type);
-                return;
             }
-            sb.Append(GetSimpleTypeName(type));
+            else
+            {
+                sb.Append(GetSimpleTypeName(type));
+            }
+         
         }
 
         static Type GetRootElementType(Type type)
@@ -811,7 +813,7 @@ public partial class Algorithms
                 {
                     break;
                 }
-                elementType = elementType.GetElementType();
+                elementType = elementType.GetElementType()!;
             }
 
             return elementType;
@@ -838,8 +840,9 @@ public partial class Algorithms
                         return;
                     }
                     //append bracket with rank
+                    var rank = type.GetArrayRank();
                     sb.Append('[');
-                    sb.Append(',', type.GetArrayRank() - 1);
+                    sb.Append(',', rank- 1);
                     sb.Append(']');
                     //recursive call
                     type = type.GetElementType();
@@ -849,8 +852,8 @@ public partial class Algorithms
 
         static void AppendGeneric(StringBuilder sb, Type type)
         {
-
             var genericArgs = type.GenericTypeArguments;
+      
             var genericDefinition = type.GetGenericTypeDefinition();
             //Nullable
             if (genericDefinition == typeof(Nullable<>))
